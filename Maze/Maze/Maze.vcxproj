@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Maze main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyQueue.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include "MyQueue.h"
 
 using namespace std;
@@ -125,6 +126,33 @@ void StepByStepMode() {
     cout << "迷宫问题无解！" << endl;
     return;
   }
+  // 一步一步展示如何走出迷宫
+  vector<Point> path;
+  // 标记路径
+  int cur_x = ex, cur_y = ey;
+  while (cur_x != sx || cur_y != sy) {
+    int tmp_x = cur_x, tmp_y = cur_y;
+    cur_x = fa_x[tmp_x][tmp_y];
+    cur_y = fa_y[tmp_x][tmp_y];
+    path.push_back(Point(cur_x, cur_y));
+  }
+  reverse(path.begin(), path.end());
+  maze[sx][sy] = 'S';
+  maze[ex][ey] = 'E';
+  getchar();
+  for (int i = 1; i < path.size(); i++) {
+    ClearScreen();
+    cout << "展示迷宫路径，按回车键到下一帧，当前帧 = " << i << endl;
+    maze[path[i].x][path[i].y] = '!';
+    for (int i = 1; i <= size_x; i++) {
+      for (int j = 1; j <= size_y; j++) {
+        cout << maze[i][j];
+      }
+      cout << endl;
+    }
+    getchar();
+  }
+  cout << "展示完毕！" << endl;
 }
 
 

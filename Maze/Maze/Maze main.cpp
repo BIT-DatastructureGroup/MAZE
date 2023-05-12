@@ -68,25 +68,57 @@ bool bfs() {
 
 bool ReadMaze() {
   ClearScreen();
-  cout << "请输入迷宫文件名(同一目录下的): ";
-  string filename;
-  cin >> filename;
-  ifstream inputfile(filename);
-  if (!inputfile.is_open()) {
-    cout << "读取文件失败!" << endl;
-    return false;
+  cout << "===========================================" << endl;
+  cout << "|               Maze Game                 |" << endl;
+  cout << "|   Which way do you want to input?       |" << endl;
+  cout << "|-----------------------------------------|" << endl;
+  cout << "|           [1] Read From File            |" << endl;
+  cout << "|           [2] Input Directly            |" << endl;
+  cout << "===========================================" << endl;
+READ_CHOICE:
+  string choice;
+  cout << "你的选择是:";
+  cin >> choice;
+  if (choice != "1" && choice != "2") {
+    cout << "输入有误，请重新输入 " << endl;
+    goto READ_CHOICE;
   }
-  // 先读入迷宫大小
-  inputfile >> size_x >> size_y;
-  // 然后读入起点终点坐标
-  inputfile >> sx >> sy >> ex >> ey;
-  // 最后读入迷宫图
-  for (int i = 1; i <= size_x; i++) {
-    for (int j = 1; j <= size_y; j++) {
-      inputfile >> maze[i][j];
+  if (choice == "1") {
+    cout << "请输入迷宫文件名(同一目录下的): ";
+    string filename;
+    cin >> filename;
+    ifstream inputfile(filename);
+    if (!inputfile.is_open()) {
+      cout << "读取文件失败!" << endl;
+      return false;
     }
+    // 先读入迷宫大小
+    inputfile >> size_x >> size_y;
+    // 然后读入起点终点坐标
+    inputfile >> sx >> sy >> ex >> ey;
+    // 最后读入迷宫图
+    for (int i = 1; i <= size_x; i++) {
+      for (int j = 1; j <= size_y; j++) {
+        inputfile >> maze[i][j];
+      }
+    }
+    return true;
   }
-  return true;
+  else {
+    cout << "请依次输入迷宫大小，起点坐标，终点坐标，以及迷宫地形图" << endl;
+    // 先读入迷宫大小
+    cin >> size_x >> size_y;
+    // 然后读入起点终点坐标
+    cin >> sx >> sy >> ex >> ey;
+    // 最后读入迷宫图
+    for (int i = 1; i <= size_x; i++) {
+      for (int j = 1; j <= size_y; j++) {
+        cin >> maze[i][j];
+      }
+    }
+    return true;
+  }
+  
 }
 
 

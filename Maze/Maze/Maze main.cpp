@@ -68,7 +68,6 @@ bool bfs() {
 int min_len = INT_MAX;
 vector<Point> min_path;
 bool dfs() {
-    cout << 1 << endl;
     stack<Point> s;
     stack<int> l;
     stack<vector<Point>> p;
@@ -171,29 +170,35 @@ void SearchShowMode() {
   if (!ReadMaze()) return;
   //bool result = bfs();
   bool result = dfs();
+  vector<Point> path;
+  path = min_path;
   if (!result) {
     cout << "迷宫问题无解！" << endl;
     return;
   }
   // 标记路径
-  int cur_x = ex, cur_y = ey;
+  /*int cur_x = ex, cur_y = ey;
   while (cur_x != sx || cur_y != sy) {
     int tmp_x = cur_x, tmp_y = cur_y;
     cur_x = fa_x[tmp_x][tmp_y];
     cur_y = fa_y[tmp_x][tmp_y];
     maze[cur_x][cur_y] = '!';
     // cout << "from " << cur_x << "," << cur_y << endl;
-  }
+  }*/
   maze[sx][sy] = 'S';
   maze[ex][ey] = 'E';
   // 打印地图
   cout << "搜索到最短路径，路径用!标记：" << endl;
-  for (int i = 1; i <= size_x; i++) {
-    for (int j = 1; j <= size_y; j++) {
-      cout << maze[i][j];
-    }
-    cout << endl;
+  for (int i = 1; i < path.size(); i++) maze[path[i].x][path[i].y] = '!';  
+  for (int i = 1; i <= size_x; i++) 
+  {
+       for (int j = 1; j <= size_y; j++) 
+       {
+              cout << maze[i][j];
+       }
+          cout << endl;
   }
+ 
 }
 void StepByStepMode() {
   if (!ReadMaze()) return;

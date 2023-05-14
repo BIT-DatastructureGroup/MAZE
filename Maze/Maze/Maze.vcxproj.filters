@@ -23,5 +23,8 @@
     <ClInclude Include="MyQueue.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="MyStack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

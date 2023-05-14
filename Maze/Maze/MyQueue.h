@@ -5,12 +5,15 @@ class Node {
 public:
   T data;
   Node* next;
+  Node* prev;
   Node() {
     next = 0;
+    prev = 0;
     T = T();
   }
   Node(T _data) {
     next = 0;
+    prev = 0;
     data = _data;
   }
 };

@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 #include "MyQueue.h"
-#include<stack>
+#include"MyStack.h"
 using namespace std;
 
 void ShowWelcome() {
@@ -68,21 +68,21 @@ bool bfs() {
 int min_len = INT_MAX;
 vector<Point> min_path;
 bool dfs() {
-    stack<Point> s;
-    stack<int> l;
-    stack<vector<Point>> p;
-    s.push(Point(sx, sy));
-    l.push(0);
-    p.push(vector<Point>(1,Point(sx, sy)));
+    MyStack<Point> s;
+    MyStack<int> l;
+    MyStack<vector<Point>> p;
+    s.Push(Point(sx, sy));
+    l.Push(0);
+    p.Push(vector<Point>(1,Point(sx, sy)));
     vis[sx][sy] = true;
     bool reached = false;
-    while (!s.empty()) {
-        Point now = s.top();
-        int len = l.top();
-        vector<Point> path = p.top();
-        s.pop();
-        l.pop();
-        p.pop();
+    while (!s.Empty()) {
+        Point now = s.Top();
+        int len = l.Top();
+        vector<Point> path = p.Top();
+        s.Pop();
+        l.Pop();
+        p.Pop();
         if (now.x == ex && now.y == ey) {
             reached = true;
             if (len < min_len) {
@@ -97,12 +97,10 @@ bool dfs() {
             tx = now.x + dir[i][0];
             ty = now.y + dir[i][1];
             if (tx > 0 && tx <= size_x && ty > 0 && ty <= size_y && !vis[tx][ty] && maze[tx][ty] != '#') {
-                s.push(Point(tx, ty));
-                l.push(len + 1);
-                fa_x[tx][ty] = now.x;
-                fa_y[tx][ty] = now.y;
+                s.Push(Point(tx, ty));
+                l.Push(len + 1);
                 path.push_back(Point(tx, ty));
-                p.push(path);
+                p.Push(path);
                 path.pop_back();
                 vis[tx][ty] = true;
             }
